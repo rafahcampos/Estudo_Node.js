@@ -21,13 +21,21 @@ class GameController {
         }
     }
 
-
     static async cadastrarGame(req, res) {
         try {
             const novoGame = await game.create(req.body);
             res.status(201).json({ message: "Criado com sucesso", game: novoGame });
         } catch (error) {
             res.status(500).json({ message: `${error.message} - Falha ao cadastrar jogo` });
+        }
+    }
+
+    static async atualizarGame(req, res) {
+        try {
+            await game.create(req.body);
+            res.status(201).json({ message: "Game atualizado" });
+        } catch (error) {
+            res.status(500).json({ message: `${error.message} - Falha na atualização` });
         }
     }
 };

@@ -7,7 +7,7 @@ class GameController {
             const listaGames = await game.find({});
             res.status(200).json(listaGames);
         } catch (error) {
-            res.status(500).json({ message: `${error.message} - falhana requisição` });
+            res.status(500).json({ message: `${error.message} - falha na requisição` });
         }
     }
 
@@ -17,7 +17,7 @@ class GameController {
             const gameEncontrado = await game.findById(id);
             res.status(200).json(listaGames);
         } catch (error) {
-            res.status(500).json({ message: `${error.message} - falhana requisição do game` });
+            res.status(500).json({ message: `${error.message} - falha na requisição do game` });
         }
     }
 
@@ -26,7 +26,7 @@ class GameController {
             const novoGame = await game.create(req.body);
             res.status(201).json({ message: "Criado com sucesso", game: novoGame });
         } catch (error) {
-            res.status(500).json({ message: `${error.message} - Falha ao cadastrar jogo` });
+            res.status(500).json({ message: `${error.message} - Falha ao cadastrar o game` });
         }
     }
 
@@ -45,7 +45,7 @@ class GameController {
             const gameEncontrado = await game.findOneAndDelete(id);
             res.status(200).json({message: "Game excluido"});
         } catch (error) {
-            res.status(500).json({ message: `${error.message} - falhana ao deletar o game` });
+            res.status(500).json({ message: `${error.message} - falha ao deletar o game` });
         }
     }
 };

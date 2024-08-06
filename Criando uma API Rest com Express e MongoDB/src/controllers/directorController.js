@@ -1,53 +1,54 @@
 import game from "../models/Games.js";
+import director from "../models/Director.js";
 
-class GameController {
+class DirectorController {
 
-    static async listarGames(req, res) {
+    static async listarDirectors(req, res) {
         try {
-            const listaGames = await game.find({});
-            res.status(200).json(listaGames);
+            const listaDirectors = await director.find({});
+            res.status(200).json(listaDirectors);
         } catch (error) {
-            res.status(500).json({ message: `${error.message} - falhana requisição` });
+            res.status(500).json({ message: `${error.message} - falha na requisição` });
         }
     }
 
-    static async listarGamePorId(req, res) {
+    static async listarDirectorPorId(req, res) {
         try {
             const id = req.params.id;
-            const gameEncontrado = await game.findById(id);
-            res.status(200).json(listaGames);
+            const directorEncontrado = await game.findById(id);
+            res.status(200).json(listaDirectors);
         } catch (error) {
-            res.status(500).json({ message: `${error.message} - falhana requisição do game` });
+            res.status(500).json({ message: `${error.message} - falha na requisição do diretor` });
         }
     }
 
-    static async cadastrarGame(req, res) {
+    static async cadastrarDirector(req, res) {
         try {
-            const novoGame = await game.create(req.body);
-            res.status(201).json({ message: "Criado com sucesso", game: novoGame });
+            const novoDirector = await director.create(req.body);
+            res.status(201).json({ message: "Criado com sucesso", director: novoDirector });
         } catch (error) {
-            res.status(500).json({ message: `${error.message} - Falha ao cadastrar jogo` });
+            res.status(500).json({ message: `${error.message} - Falha ao cadastrar o diretor` });
         }
     }
 
-    static async atualizarGame(req, res) {
+    static async atualizarDirector(req, res) {
         try {
-            await game.create(req.body);
-            res.status(201).json({ message: "Game atualizado" });
+            await director.create(req.body);
+            res.status(201).json({ message: "Diretor atualizado" });
         } catch (error) {
             res.status(500).json({ message: `${error.message} - Falha na atualização` });
         }
     }
 
-    static async excluirGame(req, res) {
+    static async excluirDirector(req, res) {
         try {
             const id = req.params.id;
-            const gameEncontrado = await game.findOneAndDelete(id);
-            res.status(200).json({message: "Game excluido"});
+            const directorEncontrado = await director.findOneAndDelete(id);
+            res.status(200).json({message: "Director excluido"});
         } catch (error) {
-            res.status(500).json({ message: `${error.message} - falhana ao deletar o game` });
+            res.status(500).json({ message: `${error.message} - falha ao deletar o diretor` });
         }
     }
 };
 
-export default GameController;
+export default DirectorController;

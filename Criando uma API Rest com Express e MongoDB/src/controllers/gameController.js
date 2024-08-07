@@ -32,8 +32,9 @@ class GameController {
 
     static async atualizarGame(req, res) {
         try {
-            await game.create(req.body);
-            res.status(201).json({ message: "Game atualizado" });
+            const id = req.params.id;
+            const gameAtualizado = await game.findByIdAndUpdate(id, req.body);
+            res.status(201).json({ message: "Game atualizado", game:gameAtualizado });
         } catch (error) {
             res.status(500).json({ message: `${error.message} - Falha na atualização` });
         }
@@ -42,7 +43,7 @@ class GameController {
     static async excluirGame(req, res) {
         try {
             const id = req.params.id;
-            const gameEncontrado = await game.findOneAndDelete(id);
+            await game.findByIdAndDelete(id);
             res.status(200).json({message: "Game excluido"});
         } catch (error) {
             res.status(500).json({ message: `${error.message} - falha ao deletar o game` });

@@ -1,5 +1,4 @@
-import game from "../models/Games.js";
-import director from "../models/Director.js";
+import {director} from "../models/Director.js";
 
 class DirectorController {
 
@@ -8,7 +7,7 @@ class DirectorController {
             const listaDirectors = await director.find({});
             res.status(200).json(listaDirectors);
         } catch (error) {
-            res.status(500).json({ message: `${error.message} - falha na requisição` });
+            res.status(500).json({ message: `${error.message} - Falha na requisição` });
         }
     }
 
@@ -18,7 +17,7 @@ class DirectorController {
             const directorEncontrado = await game.findById(id);
             res.status(200).json(listaDirectors);
         } catch (error) {
-            res.status(500).json({ message: `${error.message} - falha na requisição do diretor` });
+            res.status(500).json({ message: `${error.message} - Falha na requisição do diretor` });
         }
     }
 
@@ -33,8 +32,9 @@ class DirectorController {
 
     static async atualizarDirector(req, res) {
         try {
-            await director.create(req.body);
-            res.status(201).json({ message: "Diretor atualizado" });
+            const id = req.params.id;
+            const directorAtualizado = await director.findByIdAndUpdate(id, req.body);
+            res.status(201).json({ message: "Diretor atualizado", directorAtualizado });
         } catch (error) {
             res.status(500).json({ message: `${error.message} - Falha na atualização` });
         }
@@ -44,7 +44,7 @@ class DirectorController {
         try {
             const id = req.params.id;
             const directorEncontrado = await director.findOneAndDelete(id);
-            res.status(200).json({message: "Director excluido"});
+            res.status(200).json({ message: "Director excluido" });
         } catch (error) {
             res.status(500).json({ message: `${error.message} - falha ao deletar o diretor` });
         }

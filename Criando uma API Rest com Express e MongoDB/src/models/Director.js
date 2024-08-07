@@ -7,6 +7,6 @@ const directorSchema = new mongoose.Schema({
     nacionalidade: { type: String },
 }, { versionKey: false });
 
-const director = mongoose.model("lanhouse", directorSchema);
+const director = mongoose.model("directors", directorSchema);
 
-export default director;
+export {director, directorSchema};

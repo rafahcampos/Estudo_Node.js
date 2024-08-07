@@ -3,15 +3,10 @@ import DirectorController from "../controllers/directorController.js";
 
 const routes = express.Router();
 
-routes.get("/games", GameController.listarGames);
-
 routes.get("/directors", DirectorController.listarDirectors);
-
-routes.get("/games/:id",GameController.listarGamePorId);
-routes.get("directors/:id", DirectorController.listarDirectorPorId);
-
-routes.post("/games", GameController.cadastrarGame);
-routes.put("games/:id", GameController.atualizarGame);
-routes.delete("games/:id", GameController.excluirGame);
+routes.get("/directors/:id", DirectorController.listarDirectorPorId);
+routes.post("/directors", DirectorController.cadastrarDirector);
+routes.put("/directors/:id", DirectorController.atualizarDirector);
+routes.delete("/directors/:id", DirectorController.excluirDirector);
 
 export default routes;

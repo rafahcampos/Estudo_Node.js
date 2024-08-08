@@ -1,3 +1,4 @@
+import { director } from "../models/Director.js";
 import game from "../models/Games.js";
 
 class GameController {
@@ -21,9 +22,12 @@ class GameController {
         }
     }
 
-    static async cadastrarGame(req, res) {
+    static async cadastrarGame(req, res) { //relacionamento o banco
+        const novoGame = req.body;
         try {
-            const novoGame = await game.create(req.body);
+            const directorEncontrado = await director.findById(novoGame.director);
+            const gameCompleto = { ...novoGame, director: { ...directorEncontrado._doc}};
+            const gameCriado = await game.create(gameCompleto);
             res.status(201).json({ message: "Criado com sucesso", game: novoGame });
         } catch (error) {
             res.status(500).json({ message: `${error.message} - Falha ao cadastrar o game` });
